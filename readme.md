@@ -149,7 +149,11 @@ python main.py
 
 ## License
 
-This project is licensed under a Private License. All rights reserved to the author.
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+The source code may be used, modified, and shared for academic and non-commercial purposes, provided that appropriate credit is given to the author.
+
+The dataset used in this study is not publicly available due to confidentiality restrictions.
 
 ------------------------------------------------------------------------
 

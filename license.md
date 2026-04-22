@@ -1,17 +1,21 @@
 Copyright (c) 2026 Bruna Sousa
 
-All rights reserved.
+This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
 
-This software and datasets are private property and may not be copied, distributed, modified, or used in any way without the express written permission of the author.
+You are free to:
 
-It is prohibited to:
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
 
-Distribute copies of the software/dataset or parts thereof without authorization.
+Under the following terms:
 
-Use this software/dataset for commercial purposes without proper licensing.
+- Attribution — You must give appropriate credit to the author.
+- NonCommercial — You may not use the material for commercial purposes.
 
-Modify, decompile, reverse engineer, or exploit any part of the software/dataset without the author's consent.
+No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 
-Unauthorized use of this software/dataset may result in legal penalties.
+Full license text available at:
+https://creativecommons.org/licenses/by-nc/4.0/
 
-To obtain permission to use, please contact brunampsousa.dev@gmail.com.
+For permissions beyond the scope of this license, contact:
+brunampsousa.dev@gmail.com
