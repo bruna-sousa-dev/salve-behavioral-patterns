@@ -1,0 +1,3 @@
+ORIGINAL_DATASET_PATH = "datasets/auma_202510_dataset_filtered_by_work_schedule.csv"
+CLEANED_TEMPORAL_DATASET_PATH = "datasets/cleaned_temporal_dataset.csv"
+DERIVED_ASSOCIATION_RULES_DATASET_PATH = "datasets/derived_association_rules_dataset.csv"
