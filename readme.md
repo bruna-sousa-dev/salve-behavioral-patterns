@@ -86,16 +86,17 @@ The project includes visualization tools for:
     │   └── config.py
     |
     ├── datasets/
-    │   ├── auma_202510_dataset_filtered_by_work_schedule.csv
+    │   ├── original_dataset.csv
     |   ├── cleaned_temporal_dataset.csv
     |   └── derived_association_rules_dataset.csv (in a next step)
     |
     ├── pipelines/
-    │   ├── deterministic_pipeline.py
+    │   ├── feature_engineering_pipeline.py
     │   └── rules_generation_pipeline.py (in a next step)
     │
-    ├── visualization/
-    │   └── eda_visualization.py
+    ├── eda/
+    |   ├── statistics_eda.py
+    │   └── visualization_eda.py
     │
     ├── .gitignore
     ├── main.py
