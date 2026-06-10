@@ -1,5 +1,10 @@
 import pandas as pd
-from config import ORIGINAL_DATASET_PATH, CLEANED_TEMPORAL_DATASET_PATH
+from config import (
+    OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH, 
+    SYNTHETIC_EXPANDED_DATASET_PATH, 
+    OBSERVATIONAL_FEATURE_ENGINEERING_DATASET_PATH, 
+    SYNTETIC_FEATURE_ENGINEERING_DATASET_PATH
+)
 
 def load_data(path: str) -> pd.DataFrame:
     """
@@ -130,22 +135,28 @@ def finalize_dataset(df: pd.DataFrame) -> pd.DataFrame:
 # - Gera variáveis interpretáveis (importante para regras de associação)
 # - Mantém consistência temporal (ordenação + deltas)
 # =========================================================
-def deterministic_pipeline():
+def feature_engineering_pipeline(type_dataset: str):
     print("Carregando dados...")
-    df = load_data(ORIGINAL_DATASET_PATH)
+    if type_dataset == "observational":
+        df = load_data(OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH)
+    elif type_dataset == "synthetic":
+        df = load_data(SYNTHETIC_EXPANDED_DATASET_PATH)
 
-    print("Parse de datas...")
+    print("Convertendo colunas temporais...")
     df = parse_datetime(df)
 
-    print("Limpeza...")
+    print("Limpando dados...")
     df = clean_data(df)
 
+    # Feature engineering temporal
     print("Features temporais...")
     df = create_temporal_features(df)
 
+    # Feature engineering de dinâmica de eventos
     print("Dinâmica de eventos...")
     df = create_event_dynamics(df)
 
+    # Feature engineering de volume de alertas
     print("Features rolling...")
     df = create_rolling_features(df)
 
@@ -153,7 +164,10 @@ def deterministic_pipeline():
     df = finalize_dataset(df)
 
     print("Salvando...")
-    df.to_csv(CLEANED_TEMPORAL_DATASET_PATH, sep=",", index=False)
+    if type_dataset == "observational":
+        df.to_csv(OBSERVATIONAL_FEATURE_ENGINEERING_DATASET_PATH, sep=",", index=False)
+    elif type_dataset == "synthetic":
+        df.to_csv(SYNTETIC_FEATURE_ENGINEERING_DATASET_PATH, sep=",", index=False)
 
-    print("Dataset limpo gerado com sucesso!")
+    print("✅ Dataset com features derivadas gerado com sucesso!")
     print(df.head())
