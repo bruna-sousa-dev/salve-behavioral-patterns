@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from config import CLEANED_TEMPORAL_DATASET_PATH
+from config import OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH
 
 
 def load_data(path: str) -> pd.DataFrame:
@@ -8,7 +8,7 @@ def load_data(path: str) -> pd.DataFrame:
     return df
 
 
-df = load_data(CLEANED_TEMPORAL_DATASET_PATH)
+df = load_data(OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH)
 
 
 def print_section(title: str):

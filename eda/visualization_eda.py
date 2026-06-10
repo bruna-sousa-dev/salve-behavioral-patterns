@@ -2,7 +2,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from config import CLEANED_TEMPORAL_DATASET_PATH
+from config import OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH
 
 plt.rcParams.update({
     "font.size": 14,
@@ -17,7 +17,7 @@ def load_data(path: str) -> pd.DataFrame:
     return df
 
 
-df = load_data(CLEANED_TEMPORAL_DATASET_PATH)
+df = load_data(OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH)
 
 
 def visualize_response_time_distribution():
