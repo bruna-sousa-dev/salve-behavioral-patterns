@@ -1,3 +1,16 @@
-ORIGINAL_DATASET_PATH = "datasets/original_dataset.csv"
-CLEANED_TEMPORAL_DATASET_PATH = "datasets/cleaned_temporal_dataset.csv"
-DERIVED_ASSOCIATION_RULES_DATASET_PATH = "datasets/derived_association_rules_dataset.csv"
+OBSERVATIONAL_DATASET_PATH = "datasets/0_observational_dataset.csv"
+
+OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH = "datasets/1_observational_cleaned_preprocessed_dataset.csv"
+
+SYNTHETIC_EXPANDED_DATASET_PATH = "datasets/2_synthetic_expanded_dataset.csv"
+SYNTHETIC_DATASET_ONLY_PATH = "datasets/2_synthetic_records_only.csv"
+SYNTHETIC_EXPANSION_VALIDATION_REPORT = "datasets/2_synthetic_expansion_validation_report.csv"
+
+OBSERVATIONAL_FEATURE_ENGINEERING_DATASET_PATH = "datasets/3_observational_feature_engineering_dataset.csv"
+SYNTETIC_FEATURE_ENGINEERING_DATASET_PATH = "datasets/3_synthetic_feature_engineering_dataset.csv"
+
+OBSERVATIONAL_DISCRETIZATION_CATEGORICAL_DATASET_PATH = "datasets/4_observational_discretization_categorical_dataset.csv"
+SYNTETIC_DISCRETIZATION_CATEGORICAL_DATASET_PATH = "datasets/4_synthetic_discretization_categorical_dataset.csv"
+
+OBSERVATIONAL_TRANSACTIONAL_DATASET_PATH = "datasets/5_observational_transactional_dataset.csv"
+SYNTETIC_TRANSACTIONAL_DATASET_PATH = "datasets/5_synthetic_transactional_dataset.csv"

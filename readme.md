@@ -86,21 +86,44 @@ The project includes visualization tools for:
     │   └── config.py
     |
     ├── datasets/
-    │   ├── original_dataset.csv
-    |   ├── cleaned_temporal_dataset.csv
-    |   └── derived_association_rules_dataset.csv (in a next step)
+    │   ├── 0_observational_dataset.csv
+    |   ├── 1_observational_cleaned_preprocessed_dataset.csv
+    |   ├── 2_synthetic_expanded_dataset.csv
+    |   ├── 2_synthetic_expansion_validation_report.csv
+    |   ├── 2_synthetic_records_only.csv
+    |   ├── 3_observational_feature_engineering_dataset.csv
+    |   ├── 3_synthetic_feature_engineering_dataset.csv
+    |   ├── 4_observational_discretization_categorical_dataset.csv
+    |   ├── 4_synthetic_discretization_categorical_dataset.csv
+    |   ├── 5_observational_transactional_dataset.csv
+    |   └── 5_synthetic_transactional_dataset.csv
     |
-    ├── pipelines/
-    │   ├── feature_engineering_pipeline.py
-    │   └── rules_generation_pipeline.py (in a next step)
-    │
     ├── eda/
     |   ├── statistics_eda.py
     │   └── visualization_eda.py
     │
+    ├── outputARM/ (in a next step)
+    |   ├── apriori_observational_output.csv
+    |   ├── apriori_synthetic_output.csv
+    |   ├── fpgrowth_observational_output.csv
+    |   ├── fpgrowth_synthetic_output.csv
+    |   ├── eclat_observational_output.csv
+    │   └── eclat_synthetic_output.csv
+    │
+    ├── pipelines/
+    │   ├── cleaning_preproccess_pipeline.py
+    │   ├── discretization_categorical_pipeline.py
+    │   ├── feature_engineering_pipeline.py
+    │   ├── syntetic_dataset_expansion_pipeline.py
+    │   ├── transactional_format_pipeline.py
+    │   ├── apriori_pipeline.py (in a next step)
+    │   ├── fpgrowth_pipeline.py (in a next step)
+    │   └── eclat_pipeline.py (in a next step)
+    │
     ├── .gitignore
+    ├── license.md
     ├── main.py
-    ├── README.md
+    ├── readme.md
     └── requirements.txt
 
 ------------------------------------------------------------------------
@@ -112,9 +135,21 @@ The project includes visualization tools for:
 Edit `config.py`:
 
 ``` python
-ORIGINAL_DATASET_PATH = "path/to/raw_dataset.csv"
-CLEANED_TEMPORAL_DATASET_PATH = "path/to/cleaned_dataset.csv"
-DERIVED_ASSOCIATION_RULES_DATASET_PATH = "path/to/association_rules_dataset.csv"
+OBSERVATIONAL_DATASET_PATH = "path/to/0_observational_dataset.csv"
+OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH = "path/to/1_observational_cleaned_preprocessed_dataset.csv"
+
+SYNTHETIC_EXPANDED_DATASET_PATH = "path/to/2_synthetic_expanded_dataset.csv"
+SYNTHETIC_DATASET_ONLY_PATH = "path/to/2_synthetic_records_only.csv"
+SYNTHETIC_EXPANSION_VALIDATION_REPORT = "path/to/2_synthetic_expansion_validation_report.csv"
+
+OBSERVATIONAL_FEATURE_ENGINEERING_DATASET_PATH = "path/to/3_observational_feature_engineering_dataset.csv"
+SYNTETIC_FEATURE_ENGINEERING_DATASET_PATH = "path/to/3_synthetic_feature_engineering_dataset.csv"
+
+OBSERVATIONAL_DISCRETIZATION_CATEGORICAL_DATASET_PATH = "path/to/4_observational_discretization_categorical_dataset.csv"
+SYNTETIC_DISCRETIZATION_CATEGORICAL_DATASET_PATH = "path/to/4_synthetic_discretization_categorical_dataset.csv"
+
+OBSERVATIONAL_TRANSACTIONAL_DATASET_PATH = "path/to/5_observational_transactional_dataset.csv"
+SYNTETIC_TRANSACTIONAL_DATASET_PATH = "path/to/5_synthetic_transactional_dataset.csv"
 ```
 
 ------------------------------------------------------------------------
@@ -124,20 +159,8 @@ DERIVED_ASSOCIATION_RULES_DATASET_PATH = "path/to/association_rules_dataset.csv"
 In `main.py`, select the desired step:
 
 ``` python
-step = "pipeline_deterministico"
+step = "cleaning_preproccess_pipeline"
 ```
-
-Available options:
-
--   `pipeline_deterministico`
--   `visualizacao_distribuicao_tempo_resposta`
--   `visualizacao_boxplot_tempo_resposta`
--   `visualizacao_tempo_resposta_por_hora`
--   `visualizacao_taxa_atendimento_dia_util_vs_fim_de_semana`
--   `visualizacao_matriz_correlacao`
--   `visualizacao_todas`
--   `pipeline_geracao_regras`
-
 ------------------------------------------------------------------------
 
 ### 3. Run
@@ -157,21 +180,10 @@ The source code may be used, modified, and shared for academic and non-commercia
 The dataset used in this study is not publicly available due to confidentiality restrictions.
 
 ------------------------------------------------------------------------
-
 ## Author
 
-Developed by:
+Developed by **Bruna Sousa**.
 
-Bruna Sousa
+Electronic Engineer | IoT Developer | Web Developer | AI Developer
 
-Electrical / Electronic Engineer
-
-Specialization in Data Science and Artificial Intelligence
-
-Developer in Science, Technology and Innovation - FAPEMIG
-
-Email: brunampsousa.dev@gmail.com
-
-GitHub: https://github.com/bruna-sousa-dev
-
-LinkedIn: https://www.linkedin.com/in/bruna-sousa-dev
+[Email](mailto:brunampsousa.dev@gmail.com) • [GitHub](https://github.com/bruna-sousa-dev) • [LinkedIn](https://www.linkedin.com/in/bruna-sousa-dev)
