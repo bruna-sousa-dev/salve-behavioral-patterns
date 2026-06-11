@@ -39,17 +39,17 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 # - Mantém consistência temporal (ordenação + deltas)
 # =========================================================
 def cleaning_preprocess_pipeline():
-    print("Carregando dados...")
+    print("[CLEANING] Carregando dados...")
     df = load_data(OBSERVATIONAL_DATASET_PATH)
 
     # Limpeza e preprocessamento
-    print("Parse de datas...")
+    print("[CLEANING] Parse de datas...")
     df = parse_datetime(df)
-    print("Limpeza...")
+    print("[CLEANING] Limpeza...")
     df = clean_data(df)
 
-    print("Salvando...")
+    print("[CLEANING] Salvando...")
     df.to_csv(OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH, sep=",", index=False)
 
-    print("✅ Dataset limpo gerado com sucesso!")
+    print("[CLEANING] Dataset limpo gerado com sucesso!")
     print(df.head())

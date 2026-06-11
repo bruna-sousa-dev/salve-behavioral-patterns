@@ -31,14 +31,14 @@ def select_transactional_columns(df: pd.DataFrame) -> pd.DataFrame:
 
     cols = [
         "hour_bin",
-        "part_of_day",
+        # "part_of_day",
         "day_of_week",
         "weekend_status",
         "time_since_prev_alert_class",
         "alerts_last_15m_class",
         "alerts_last_60m_class",
         "response_time_class",
-        "served_status",
+        # "served_status",
     ]
 
     missing_columns = [col for col in cols if col not in df.columns]
@@ -121,30 +121,30 @@ def transactional_format_pipeline(type_dataset: str) -> list[list[str]]:
     Executa apenas a etapa de conversão para formato transacional.
     """
 
-    print("🔹 Carregando base categórica discretizada...")
+    print("[TRANSACTIONAL_FORMAT] Carregando base categórica discretizada...")
     if type_dataset == "observational":
         df = load_data(OBSERVATIONAL_DISCRETIZATION_CATEGORICAL_DATASET_PATH)
     elif type_dataset == "synthetic":
         df = load_data(SYNTETIC_DISCRETIZATION_CATEGORICAL_DATASET_PATH)
 
-    print("🔹 Selecionando colunas transacionais...")
+    print("[TRANSACTIONAL_FORMAT] Selecionando colunas transacionais...")
     df_transactional = select_transactional_columns(df)
 
-    print("🔹 Convertendo para formato transacional...")
+    print("[TRANSACTIONAL_FORMAT] Convertendo para formato transacional...")
     records = convert_to_transactional_format(df_transactional)
 
-    print(f"🔹 Número de transações geradas: {len(records)}")
+    print(f"[TRANSACTIONAL_FORMAT] Número de transações geradas: {len(records)}")
 
     if records:
-        print("🔹 Exemplo de transação:")
+        print("[TRANSACTIONAL_FORMAT] Exemplo de transação:")
         print(records[0])
 
-    print("🔹 Salvando base transacional...")
+    print("[TRANSACTIONAL_FORMAT] Salvando base transacional...")
     if type_dataset == "observational":
         export_transactional_dataset(records, OBSERVATIONAL_TRANSACTIONAL_DATASET_PATH)
     elif type_dataset == "synthetic":
         export_transactional_dataset(records, SYNTETIC_TRANSACTIONAL_DATASET_PATH)
 
-    print("✅ Dataset transacional gerado com sucesso!")
+    print("[TRANSACTIONAL_FORMAT] Dataset transacional gerado com sucesso!")
 
     return records

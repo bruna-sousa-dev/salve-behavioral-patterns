@@ -148,32 +148,32 @@ def convert_to_item_format(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 def discretization_categorical_pipeline(type_dataset: str):
-    print("🔹 Carregando base limpa...")
+    print("[DISCRETIZATION_CATEGORICAL] Carregando base limpa...")
     if type_dataset == "observational":
         df = load_data(OBSERVATIONAL_FEATURE_ENGINEERING_DATASET_PATH)
     elif type_dataset == "synthetic":
         df = load_data(SYNTETIC_FEATURE_ENGINEERING_DATASET_PATH)
 
-    print("🔹 Convertendo datas...")
+    print("[DISCRETIZATION_CATEGORICAL] Convertendo datas...")
     df = parse_datetime(df)
 
-    print("🔹 Criando faixas horárias...")
+    print("[DISCRETIZATION_CATEGORICAL] Criando faixas horárias...")
     df = create_hour_bin(df)
 
-    print("🔹 Criando variáveis discretizadas...")
+    print("[DISCRETIZATION_CATEGORICAL] Criando variáveis discretizadas...")
     df = create_discretized_features(df)
 
-    print("🔹 Selecionando colunas para associação...")
+    print("[DISCRETIZATION_CATEGORICAL] Selecionando colunas para associação...")
     df_assoc = select_association_columns(df)
 
-    print("🔹 Convertendo para formato item=valor...")
+    print("[DISCRETIZATION_CATEGORICAL] Convertendo para formato item=valor...")
     df_assoc = convert_to_item_format(df_assoc)
 
-    print("🔹 Salvando base final...")
+    print("[DISCRETIZATION_CATEGORICAL] Salvando base final...")
     if type_dataset == "observational":
         df_assoc.to_csv(OBSERVATIONAL_DISCRETIZATION_CATEGORICAL_DATASET_PATH, sep=",", index=False)
     elif type_dataset == "synthetic":
         df_assoc.to_csv(SYNTETIC_DISCRETIZATION_CATEGORICAL_DATASET_PATH, sep=",", index=False)
 
-    print("✅ Dataset discretisado para regras de associação gerado com sucesso!")
+    print("[DISCRETIZATION_CATEGORICAL] Dataset discretisado para regras de associação gerado com sucesso!")
     print(df_assoc.head())

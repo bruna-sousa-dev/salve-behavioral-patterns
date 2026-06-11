@@ -136,38 +136,38 @@ def finalize_dataset(df: pd.DataFrame) -> pd.DataFrame:
 # - Mantém consistência temporal (ordenação + deltas)
 # =========================================================
 def feature_engineering_pipeline(type_dataset: str):
-    print("Carregando dados...")
+    print("[FEATURE_ENGINEERING] Carregando dados...")
     if type_dataset == "observational":
         df = load_data(OBSERVATIONAL_CLEANED_PREPROCESSED_DATASET_PATH)
     elif type_dataset == "synthetic":
         df = load_data(SYNTHETIC_EXPANDED_DATASET_PATH)
 
-    print("Convertendo colunas temporais...")
+    print("[FEATURE_ENGINEERING] Convertendo colunas temporais...")
     df = parse_datetime(df)
 
-    print("Limpando dados...")
+    print("[FEATURE_ENGINEERING] Limpando dados...")
     df = clean_data(df)
 
     # Feature engineering temporal
-    print("Features temporais...")
+    print("[FEATURE_ENGINEERING] Features temporais...")
     df = create_temporal_features(df)
 
     # Feature engineering de dinâmica de eventos
-    print("Dinâmica de eventos...")
+    print("[FEATURE_ENGINEERING] Dinâmica de eventos...")
     df = create_event_dynamics(df)
 
     # Feature engineering de volume de alertas
-    print("Features rolling...")
+    print("[FEATURE_ENGINEERING] Features rolling...")
     df = create_rolling_features(df)
 
-    print("Finalizando dataset...")
+    print("[FEATURE_ENGINEERING] Finalizando dataset...")
     df = finalize_dataset(df)
 
-    print("Salvando...")
+    print("[FEATURE_ENGINEERING] Salvando...")
     if type_dataset == "observational":
         df.to_csv(OBSERVATIONAL_FEATURE_ENGINEERING_DATASET_PATH, sep=",", index=False)
     elif type_dataset == "synthetic":
         df.to_csv(SYNTETIC_FEATURE_ENGINEERING_DATASET_PATH, sep=",", index=False)
 
-    print("✅ Dataset com features derivadas gerado com sucesso!")
+    print("[FEATURE_ENGINEERING] Dataset com features derivadas gerado com sucesso!")
     print(df.head())
