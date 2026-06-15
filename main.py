@@ -1,6 +1,6 @@
 type_dataset = "synthetic" # observational or synthetic
 
-step = "visualizacao_distribuicao_tempo_resposta"
+step = "compute_all_rule_overlaps"
 """
 Definir qual pipeline executar
 Opções: 
@@ -44,9 +44,16 @@ Opções:
 -> "run_all_statistics":
       Executa todas as análises estatísticas de EDA em sequência.
       
--> "pipeline_geracao_regras":
-      Executa a pipeline de geração de regras, que inclui a aplicação do algoritmo Apriori para 
-      gerar regras de associação a partir dos dados processados.
+>>> Execução das pipelines de ARM para os datasets observacional e sintético:
+-> "run_arm" com type_dataset="observational":  
+        Executa as pipelines de ARM (Apriori, FP-Growth e ECLAT) para o dataset observacional ou sintético a depender de type_dataset, incluindo limpeza, engenharia de features, discretização categórica, formatação transacional, extração de regras e exportação dos resultados.
+      
+>>> Geração dos resultados e tabelas para a seção de Resultados e Discussão:
+-> "generate_all_results_tables":
+        Executa a pipeline de geração de tabelas, que inclui a criação da tabela de comparação de algoritmos e as tabelas dos top 10 regras para os datasets observacional e sintético.
+
+-> "compute_all_rule_overlaps":
+        Executa a pipeline de cálculo de sobreposição de regras, que compara as regras geradas pelos algoritmos Apriori, FP-Growth e ECLAT nos datasets observacional e sintético, e exporta os resumos e as regras comuns para CSV.
 """
 
 from pipelines import (
@@ -68,6 +75,17 @@ from pipelines import (
     export_experiment_summary,
 )
 
+from config import (
+    APRIORI_OBSERVATIONAL_OUTPUT_PATH,
+    FP_GROWTH_OBSERVATIONAL_OUTPUT_PATH,
+    ECLAT_OBSERVATIONAL_OUTPUT_PATH,
+    APRIORI_SYNTHETIC_OUTPUT_PATH,
+    FP_GROWTH_SYNTHETIC_OUTPUT_PATH,
+    ECLAT_SYNTHETIC_OUTPUT_PATH,
+    ARM_EXPERIMENT_SUMMARY_OBSERVATIONAL_PATH,
+    ARM_EXPERIMENT_SUMMARY_SYNTHETIC_PATH,
+)
+
 target_consequents = {
     "response_time_class=not_served",
     "response_time_class=fast_le_60s",
@@ -78,7 +96,7 @@ min_antecedent_size = 2
 max_antecedent_size = 3
 experiment_summary_rows = []
 
-if type_dataset == "observational":
+if step == "run_arm" and type_dataset == "observational":
 
     print("-" * 100)
     print(f"[DATASET] Tipo do dataset: {type_dataset}")
@@ -246,25 +264,25 @@ if type_dataset == "observational":
 
     print("[EXPORT_RULES] Exportando regras de associação para CSV...")
     print("[EXPORT_RULES_APRIORI]...")
-    export_rules(apriori_rules_df, "outputARM/apriori_observational_output.csv")
+    export_rules(apriori_rules_df, APRIORI_OBSERVATIONAL_OUTPUT_PATH)
     print("[EXPORT_RULES_APRIORI] OK.")
 
     print("[EXPORT_RULES_FPGROWTH]...")
-    export_rules(fpgrowth_rules_df, "outputARM/fpgrowth_observational_output.csv")
+    export_rules(fpgrowth_rules_df, FP_GROWTH_OBSERVATIONAL_OUTPUT_PATH)
     print("[EXPORT_RULES_FPGROWTH] OK.")
 
     print("[EXPORT_RULES_ECLAT]...")
-    export_rules(eclat_rules_df, "outputARM/eclat_observational_output.csv")
+    export_rules(eclat_rules_df, ECLAT_OBSERVATIONAL_OUTPUT_PATH)
     print("[EXPORT_RULES_ECLAT] OK.")
 
     export_experiment_summary(
         experiment_summary_rows,
-        f"outputARM/arm_experiment_summary_{type_dataset}.csv",
+        ARM_EXPERIMENT_SUMMARY_OBSERVATIONAL_PATH,
     )
 
     print("-" * 100)
 
-elif type_dataset == "synthetic":
+elif step == "run_arm" and type_dataset == "synthetic":
     
     print("-" * 100)
     print(f"[DATASET] Tipo do dataset: {type_dataset}")
@@ -436,25 +454,39 @@ elif type_dataset == "synthetic":
 
     print("[EXPORT_RULES] Exportando regras de associação para CSV...")
     print("[EXPORT_RULES_APRIORI]...")
-    export_rules(apriori_rules_df, "outputARM/apriori_synthetic_output.csv")
+    export_rules(apriori_rules_df, APRIORI_SYNTHETIC_OUTPUT_PATH)
     print("[EXPORT_RULES_APRIORI] OK.")
 
     print("[EXPORT_RULES_FPGROWTH]...")
-    export_rules(fpgrowth_rules_df, "outputARM/fpgrowth_synthetic_output.csv")
+    export_rules(fpgrowth_rules_df, FP_GROWTH_SYNTHETIC_OUTPUT_PATH)
     print("[EXPORT_RULES_FPGROWTH] OK.")
 
     print("[EXPORT_RULES_ECLAT]...")
-    export_rules(eclat_rules_df, "outputARM/eclat_synthetic_output.csv")
+    export_rules(eclat_rules_df, ECLAT_SYNTHETIC_OUTPUT_PATH)
     print("[EXPORT_RULES_ECLAT] OK.")
 
     export_experiment_summary(
         experiment_summary_rows,
-        f"outputARM/arm_experiment_summary_{type_dataset}.csv",
+        ARM_EXPERIMENT_SUMMARY_SYNTHETIC_PATH,
     )
 
     print("-" * 100)
 
+# Geração dos resultados e tabelas
+elif step == "generate_all_results_tables":
+    from pipelines import generate_all_results_tables
+    print("[RESULTS_TABLE] Executando pipeline de geração de tabelas para Resultados e Discussão...")
+    generate_all_results_tables()
+    print("[RESULTS_TABLE] OK.")
+    print("-" * 100)
 
+# Geração dos resultados e tabelas
+elif step == "compute_all_rule_overlaps":
+    from pipelines import compute_all_rule_overlaps
+    print("[RULE_OVERLAP] Executando pipeline de cálculo de sobreposição de regras...")
+    compute_all_rule_overlaps()
+    print("[RULE_OVERLAP] OK.")
+    print("-" * 100)
 
 elif step in [
     "visualizacao_distribuicao_tempo_resposta",

@@ -14,3 +14,25 @@ SYNTETIC_DISCRETIZATION_CATEGORICAL_DATASET_PATH = "datasets/4_synthetic_discret
 
 OBSERVATIONAL_TRANSACTIONAL_DATASET_PATH = "datasets/5_observational_transactional_dataset.csv"
 SYNTETIC_TRANSACTIONAL_DATASET_PATH = "datasets/5_synthetic_transactional_dataset.csv"
+
+APRIORI_OBSERVATIONAL_OUTPUT_PATH = "outputARM/apriori_observational_output.csv"
+FP_GROWTH_OBSERVATIONAL_OUTPUT_PATH = "outputARM/fpgrowth_observational_output.csv"
+ECLAT_OBSERVATIONAL_OUTPUT_PATH = "outputARM/eclat_observational_output.csv"
+
+APRIORI_SYNTHETIC_OUTPUT_PATH = "outputARM/apriori_synthetic_output.csv"
+FP_GROWTH_SYNTHETIC_OUTPUT_PATH = "outputARM/fpgrowth_synthetic_output.csv"
+ECLAT_SYNTHETIC_OUTPUT_PATH = "outputARM/eclat_synthetic_output.csv"
+
+ARM_EXPERIMENT_SUMMARY_OBSERVATIONAL_PATH = "outputARM/arm_experiment_summary_observational.csv"
+ARM_EXPERIMENT_SUMMARY_SYNTHETIC_PATH = "outputARM/arm_experiment_summary_synthetic.csv"
+
+RESULTS_ALGORITHM_COMPARISON_TABLE_PATH = "outputARM/results_algorithm_comparison_table.csv"
+
+RESULTS_TOP10_RULES_OBSERVATIONAL_PATH = "outputARM/results_top10_rules_observational.csv"
+RESULTS_TOP10_RULES_SYNTHETIC_PATH = "outputARM/results_top10_rules_synthetic.csv"
+
+RULE_OVERLAP_SUMMARY_ALL_ALGORITHMS_PATH = "outputARM/rule_overlap_summary_all_algorithms.csv"
+
+RULE_OVERLAP_SUMMARY_GENERIC_PATH = "outputARM/rule_overlap_summary_{}.csv"
+
+COMMON_RULES_OUTPUT_PATH = "outputARM/common_rules_{}.csv"
